@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/home_24dp_e3e3e3__3_"/>
+
+    <item
+        android:id="@+id/tourism"
+        android:title="Places"
+        android:icon="@drawable/location_on_24dp_e3e3e3"/>
+
+    <item
+        android:id="@+id/favorite"
+        android:title="Favorites"
+        android:icon="@drawable/favorite_24dp_e3e3e3"/>
+
+    <item
+        android:id="@+id/features"
+        android:title="Features"
+        android:icon="@drawable/auto_graph_24dp_e3e3e3"/>
+</menu>

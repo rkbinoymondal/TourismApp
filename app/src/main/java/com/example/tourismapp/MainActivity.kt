@@ -8,40 +8,56 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
+import com.example.tourismapp.Adapter.TouristPlacesRecyclerViewAdapter
+import com.example.tourismapp.Adapter.ViewPagerBottomNavigationViewAdapter
 import com.example.tourismapp.Application.MyApplication
 import com.example.tourismapp.Repository.Response
 import com.example.tourismapp.ViewModel.ViewModelTourism
 import com.example.tourismapp.ViewModel.ViewModelTourismFactory
+import com.example.tourismapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val repository = (application as MyApplication).repository
+        binding.viewPagerMain.adapter = ViewPagerBottomNavigationViewAdapter(this);
 
-        val mainViewModel = ViewModelProvider(this,ViewModelTourismFactory(repository)).get(ViewModelTourism::class.java);
+        binding.bottomNavView.setOnItemSelectedListener { menuItem ->
+            when(menuItem.itemId){
+                R.id.home -> binding.viewPagerMain.setCurrentItem(0,true);
+                R.id.tourism -> binding.viewPagerMain.setCurrentItem(1,true);
+                R.id.favorite -> binding.viewPagerMain.setCurrentItem(2,true);
+                R.id.features -> binding.viewPagerMain.setCurrentItem(3,true);
+            }
+            true
+        }
 
-        mainViewModel.touristPlacesList.observe(this,Observer{
-            when(it){
-                is Response.Loading -> {
-                    Log.d("RK","In Loading State")
-                }
-                is Response.Success -> {
-                    for (place in it.data!!){
-                        Log.d("RK","${place}")
+        binding.viewPagerMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                binding.bottomNavView.selectedItemId =
+                    when(position){
+                        0 -> R.id.home
+                        1 -> R.id.tourism
+                        2 -> R.id.favorite
+                        3 -> R.id.features
+                        else -> R.id.home
                     }
-                }
-                is Response.Failure -> {
-                    Log.d("RK",it.errorMessage!!);
-                }
             }
         })
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
             insets
         }
     }

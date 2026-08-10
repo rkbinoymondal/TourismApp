@@ -1,60 +1,75 @@
 package com.example.tourismapp.Fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.tourismapp.R
+import com.example.tourismapp.ViewModel.MapSharedViewModel
+import com.example.tourismapp.databinding.FragmentAnalysisBinding
+import com.example.tourismapp.databinding.FragmentGoogleMapBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CircleOptions
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class GoogleMapFragment : Fragment() , OnMapReadyCallback {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GoogleMapFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class GoogleMapFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var mMap: GoogleMap
+    private var _binding : FragmentGoogleMapBinding? = null;
+    private val binding get() = _binding!!;
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var mapSharedViewModel : MapSharedViewModel;
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_google_map, container, false)
+        _binding = FragmentGoogleMapBinding.inflate(inflater, container, false)
+        return binding.root;
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GoogleMapFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GoogleMapFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mapSharedViewModel = ViewModelProvider(requireActivity()).get(MapSharedViewModel::class.java);
+
+        val mapFragment = childFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        mapSharedViewModel.selectedPlace.observe(viewLifecycleOwner, Observer {
+            if (it != null){
+                val lat = it.latitude.toDoubleOrNull();
+                val lon = it.longitude.toDoubleOrNull();
+
+                if (lat != null && lon != null){
+                    val location = LatLng(lat,lon);
+                    mMap.clear();
+
+                    mMap.addMarker(MarkerOptions().position(location).title(it.placeName).snippet("${it.city}, ${it.state}"))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,13f));
+
+                    mMap.addCircle(CircleOptions().center(location).radius(1000.0).fillColor(Color.argb(50,255,0,255)).strokeWidth(0f))
                 }
             }
+        })
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null;
     }
 }

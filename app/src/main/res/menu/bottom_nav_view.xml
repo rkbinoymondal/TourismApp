@@ -11,12 +11,12 @@
         android:icon="@drawable/location_on_24dp_e3e3e3"/>
 
     <item
-        android:id="@+id/favorite"
-        android:title="Favorites"
-        android:icon="@drawable/favorite_24dp_e3e3e3"/>
+        android:id="@+id/map"
+        android:title="Map"
+        android:icon="@drawable/map_24dp_e3e3e3"/>
 
     <item
-        android:id="@+id/features"
-        android:title="Features"
-        android:icon="@drawable/auto_graph_24dp_e3e3e3"/>
+        android:id="@+id/chart"
+        android:title="Analysis"
+        android:icon="@drawable/pie_chart_24dp_e3e3e3"/>
 </menu>

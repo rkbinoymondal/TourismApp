@@ -12,5 +12,7 @@ data class TouristPlaces(
     val state : String,
     val description : String,
     val famousFor : String,
-    val imageUrl : String
+    val imageUrl : String,
+    val latitude : String,
+    val longitude : String
 )

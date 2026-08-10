@@ -31,12 +31,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.viewPagerMain.adapter = ViewPagerBottomNavigationViewAdapter(this);
 
+        binding.viewPagerMain.isUserInputEnabled = false;
+
         binding.bottomNavView.setOnItemSelectedListener { menuItem ->
             when(menuItem.itemId){
                 R.id.home -> binding.viewPagerMain.setCurrentItem(0,true);
                 R.id.tourism -> binding.viewPagerMain.setCurrentItem(1,true);
-                R.id.favorite -> binding.viewPagerMain.setCurrentItem(2,true);
-                R.id.features -> binding.viewPagerMain.setCurrentItem(3,true);
+                R.id.map -> binding.viewPagerMain.setCurrentItem(2,true);
+                R.id.chart -> binding.viewPagerMain.setCurrentItem(3,true);
             }
             true
         }
@@ -48,8 +50,8 @@ class MainActivity : AppCompatActivity() {
                     when(position){
                         0 -> R.id.home
                         1 -> R.id.tourism
-                        2 -> R.id.favorite
-                        3 -> R.id.features
+                        2 -> R.id.map
+                        3 -> R.id.chart
                         else -> R.id.home
                     }
             }

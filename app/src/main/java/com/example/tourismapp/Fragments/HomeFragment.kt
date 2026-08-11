@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.tourismapp.MainActivity
 import com.example.tourismapp.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -19,10 +20,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        binding.btn.setOnClickListener {
-//            val intent = Intent(requireContext(), MapsActivity::class.java);
-//            startActivity(intent);
-//        }
+        binding.btnExploreNow.setOnClickListener {
+            (requireActivity() as MainActivity).binding.viewPagerMain.setCurrentItem(1,true);
+        }
+
+        binding.cardFeatureMap.setOnClickListener {
+            (requireActivity() as MainActivity).binding.viewPagerMain.setCurrentItem(2,true);
+        }
+
+        binding.cardFeatureAnalytics.setOnClickListener {
+            (requireActivity() as MainActivity).binding.viewPagerMain.setCurrentItem(3,true);
+        }
     }
 
     override fun onDestroyView() {

@@ -1,3 +1,12 @@
+import java.io.FileInputStream
+import java.util.Properties
+
+val localProperties = Properties();
+val localPropertiesFile = rootProject.file("local.properties")
+
+if (localPropertiesFile.exists()){
+    localProperties.load(FileInputStream(localPropertiesFile));
+}
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.devtools.ksp")
@@ -18,6 +27,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val apiKey = localProperties.getProperty("Gemini_API_KEY")
+        buildConfigField("String","Gemini_API_KEY","\"$apiKey\"")
     }
 
     buildTypes {
@@ -32,6 +44,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     buildFeatures{
+        buildConfig = true;
         viewBinding = true;
     }
 }
@@ -55,4 +68,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:3.0.0")
     implementation("com.github.bumptech.glide:glide:5.0.5")
     implementation("com.airbnb.android:lottie:6.7.1")
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
 }

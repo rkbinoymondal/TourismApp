@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.tourismapp.R
 import com.example.tourismapp.ViewModel.MapSharedViewModel
-import com.example.tourismapp.databinding.FragmentAnalysisBinding
 import com.example.tourismapp.databinding.FragmentGoogleMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

@@ -2,17 +2,15 @@ package com.example.tourismapp.Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import com.example.tourismapp.Model.TouristPlaces
 import com.example.tourismapp.databinding.TourismCardBinding
 
 interface OnTouristPlaceClickListener{
     fun onPlaceClick(place : TouristPlaces);
+    fun onGeminiBtnClick(place : TouristPlaces);
 }
 
 class TouristPlacesRecyclerViewAdapter(val context : Context, val touristPlacesList : List<TouristPlaces>, val listener : OnTouristPlaceClickListener) : RecyclerView.Adapter<TouristPlacesRecyclerViewAdapter.ViewHolder>() {
@@ -31,6 +29,10 @@ class TouristPlacesRecyclerViewAdapter(val context : Context, val touristPlacesL
 
         holder.itemView.setOnClickListener {
             listener.onPlaceClick(touristPlace);
+        }
+
+        holder.binding.aiCard.setOnClickListener {
+            listener.onGeminiBtnClick(touristPlace);
         }
     }
 

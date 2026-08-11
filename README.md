@@ -1,4 +1,4 @@
-# 🌍 TourVista
+#  TourVista
 
 **TourVista** is a native Android application built to provide travelers with interactive destination maps, visual data analytics, and real-time AI travel recommendations.
 
@@ -16,7 +16,7 @@
 
 ---
 
-## 🛠️ Tech Stack & Libraries
+##  Tech Stack & Libraries
 
 * **Language:** Kotlin
 * **Architecture:** MVVM (Model-View-ViewModel) Pattern

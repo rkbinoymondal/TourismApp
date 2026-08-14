@@ -33,7 +33,7 @@
 
 * **Google Maps & Shared ViewModel:** While basic Google Maps integration was set up via Android Studio's built-in template(under google section), I used AI to learn and implement the Shared ViewModel logic to communicate place selection between the Tourism Fragment's RecyclerView and the Map Fragment.
 
-* **Dashboard / Front Page UI:** The front page layout is largely AI-assisted, as my primary focus for this project was mainly on architecture, features, and functionality rather than designing UI from scratch due to time constraints also learned the Shimmer Effect Integration with startShimmer and stopshimmer functions(built the UI of shimmer myself, just how to start animation and stop took help).
+* **Dashboard / Front Page UI:** The front page layout is largely AI-assisted(I know almost everything which got implemented(the views, layouts, attributes, etc.)), as my primary focus for this project was mainly on architecture, features, and functionality rather than designing UI from scratch due to time constraints also learned the Shimmer Effect Integration with startShimmer and stopshimmer functions(built the UI of shimmer myself, just how to start animation and stop took help).
 
 * **RecyclerView Card Design:** Polished the XML design, layout weights, and styling of the destination cards with AI assistance.
 

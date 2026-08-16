@@ -23,7 +23,7 @@
 * **UI & Views:** ViewBinding, Material Components, BottomSheetDialogFragment, Facebook Shimmer Layout
 * **Database & Networking:** Room Database, Retrofit 2, Gson
 * **APIs & SDKs:** Google Generative AI Client SDK (`gemini-3-flash-preview`), Google Maps SDK
-* **Utilities & Charts:** MPAndroidChart, Glide, Lottie Animations, Kotlin Coroutines
+* **Utilities & Charts:** MPAndroidChart, Glide, Lottie Animations, Kotlin Coroutines, Shared Preferences
 
 ##  AI & LLM Usage Disclosure
 

@@ -14,6 +14,11 @@ class TourismRepo(val context : Context, val tourismService: TourismService, val
     val touristPlacesList : LiveData<Response<List<TouristPlaces>>> = mutableTouristPlacesList;
 
     suspend fun getTouristPlaces(){
+
+        if (mutableTouristPlacesList.value is Response.Success){
+            return;
+        }
+
         if (InternetCheck.isInternetAvailable(context)){
             mutableTouristPlacesList.postValue(Response.Loading());
             try{

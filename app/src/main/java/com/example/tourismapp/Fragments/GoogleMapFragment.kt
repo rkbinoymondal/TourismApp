@@ -53,9 +53,9 @@ class GoogleMapFragment : Fragment() , OnMapReadyCallback {
                 val lon = it.longitude.toDoubleOrNull();
 
                 if (lat != null && lon != null){
-                    val location = LatLng(lat,lon);
                     mMap.clear();
 
+                    val location = LatLng(lat,lon);
                     mMap.addMarker(MarkerOptions().position(location).title(it.placeName).snippet("${it.city}, ${it.state}"))
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,13f));

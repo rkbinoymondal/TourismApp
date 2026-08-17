@@ -31,10 +31,7 @@ class TourismFragment : Fragment() {
     private val filteredList = mutableListOf<TouristPlaces>()
     private lateinit var adapter : TouristPlacesRecyclerViewAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         _binding = FragmentTourismBinding.inflate(inflater, container, false)
         return binding.root
@@ -45,7 +42,7 @@ class TourismFragment : Fragment() {
 
         val repo = (requireActivity().application as MyApplication).repository;
 
-        val mainViewModel = ViewModelProvider(this, ViewModelTourismFactory(repo)).get(
+        val mainViewModel = ViewModelProvider(requireActivity(), ViewModelTourismFactory(repo)).get(
             ViewModelTourism::class.java);
 
         val mapSharedViewModel = ViewModelProvider(requireActivity()).get(MapSharedViewModel::class.java);

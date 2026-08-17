@@ -13,8 +13,4 @@ class MapSharedViewModel : ViewModel() {
     fun selectPlace(place : TouristPlaces){
         _selectedPlace.value = place;
     }
-
-    fun clearSelection(){
-        _selectedPlace.value = null;
-    }
 }
